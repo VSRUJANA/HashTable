@@ -30,7 +30,7 @@ namespace DS_HashTable
         }
 
         //To get the index value with the help of key
-        protected int GetArrayPosition(K key)
+        public int GetArrayPosition(K key)
         {
             int position = key.GetHashCode() % size;
             return Math.Abs(position);
@@ -97,9 +97,30 @@ namespace DS_HashTable
                         frequency++;
                 }
             }
-            Console.WriteLine("Frequency of '{0}' is {1}", value, frequency);
+            Console.WriteLine("Frequency of word '{0}' in the paragraph is {1}", value, frequency);
+        }
+
+        public int GetFrequencyOfWords(V value)
+        {
+            int count = 0;
+            if (items == null)
+            {
+                Console.WriteLine("Hash table is empty");
+                return 0;
+            }
+            for (int i = 0; i < items.Length; i++)
+            {
+                LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(i);
+                foreach (KeyValue<K, V> item in linkedList)
+                {
+                    if (item.Value.Equals(value))
+                        count++;
+                }
+            }
+            return count;
         }
     }
+
     public struct KeyValue<K, V>
     {
         public K Key { get; set; }
