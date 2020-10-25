@@ -18,7 +18,7 @@ namespace DS_HashTable
         }
 
         //To get LinkedList at the particular index
-        public  LinkedList<KeyValue<K, V>> GetLinkedList(int position)
+        public LinkedList<KeyValue<K, V>> GetLinkedList(int position)
         {
             LinkedList<KeyValue<K, V>> linkedList = items[position];
             if (linkedList == null)
@@ -54,7 +54,7 @@ namespace DS_HashTable
         //Add elements to the hash table
         public void Add(K key, V value)
         {
-            int position = GetArrayPosition(key);  
+            int position = GetArrayPosition(key);
             LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
             KeyValue<K, V> item = new KeyValue<K, V>() { Key = key, Value = value };
             linkedList.AddLast(item);
@@ -82,7 +82,7 @@ namespace DS_HashTable
         }
 
         //Frequency of given value in hashtable
-        public void GetFrequency(V value)
+        public int GetFrequency(V value)
         {
             int frequency = 0;
             foreach (LinkedList<KeyValue<K, V>> list in items)
@@ -98,15 +98,15 @@ namespace DS_HashTable
                 }
             }
             Console.WriteLine("Frequency of word '{0}' in the paragraph is {1}", value, frequency);
+            return frequency;
         }
 
-        public int GetFrequencyOfWords(V value)
+        public void RemoveValue(V value)
         {
-            int count = 0;
             if (items == null)
             {
                 Console.WriteLine("Hash table is empty");
-                return 0;
+                return;
             }
             for (int i = 0; i < items.Length; i++)
             {
@@ -114,10 +114,22 @@ namespace DS_HashTable
                 foreach (KeyValue<K, V> item in linkedList)
                 {
                     if (item.Value.Equals(value))
-                        count++;
+                    {
+                        linkedList.Remove(item);
+                        Console.WriteLine("Word '{0}' is removed from paragraph", value);
+                        return;
+                    }
                 }
             }
-            return count;
+        }
+
+        public void RemoveValues(V value)
+        {
+            int iterate=GetFrequency(value);
+            for(int i=0;i<iterate;i++)
+            {
+                RemoveValue(value);
+            }
         }
     }
 
@@ -127,4 +139,5 @@ namespace DS_HashTable
         public V Value { get; set; }
     }
 }
+
 

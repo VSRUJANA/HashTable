@@ -14,8 +14,8 @@ namespace DS_HashTable
             {
                 hash.Add(i, words[i]);
             }
-            hash.GetFrequency("paranoid");
-
+            hash.RemoveValues("avoidable");
+            hash.GetFrequency("avoidable");
         }
     }
 }
