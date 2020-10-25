@@ -80,6 +80,25 @@ namespace DS_HashTable
                 linkedList.Remove(foundItem);
             }
         }
+
+        //Frequency of given value in hashtable
+        public void GetFrequency(V value)
+        {
+            int frequency = 0;
+            foreach (LinkedList<KeyValue<K, V>> list in items)
+            {
+                if (list == null)
+                    continue;
+                foreach (KeyValue<K, V> obj in list)
+                {
+                    if (obj.Equals(null))
+                        continue;
+                    if (obj.Value.Equals(value))
+                        frequency++;
+                }
+            }
+            Console.WriteLine("Frequency of '{0}' is {1}", value, frequency);
+        }
     }
     public struct KeyValue<K, V>
     {

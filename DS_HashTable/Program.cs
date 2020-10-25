@@ -14,6 +14,7 @@ namespace DS_HashTable
             hash.Add("3", "not");
             hash.Add("4", "to");
             hash.Add("5", "be");
+            hash.GetFrequency("be");
         }
     }
 }
